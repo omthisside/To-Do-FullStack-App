@@ -17,6 +17,8 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editTodo, setEditTodo] = useState<string>(todo.todo);
 
+    const createdDate = new Date();
+
     const handleDone = (id: number) => {
         setTodos(
             todos.map((todo) => 
@@ -83,6 +85,9 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
                         <span className="icon" onClick={() => handleDone(todo.id)}>
                             <MdDone />
                         </span>
+                        <div className='todo--date'>
+                            <span><small>{createdDate.toLocaleDateString()}</small></span>
+                        </div>
                     </div>
                 </form>
             )
