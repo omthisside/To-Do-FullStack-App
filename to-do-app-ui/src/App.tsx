@@ -7,6 +7,8 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 const App: React.FC = () => {
 
+  const charactersLimit = 100;
+
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
   const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
@@ -52,7 +54,8 @@ const App: React.FC = () => {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <span className="heading">Go-To-Do</span>
-        <InputFeild todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+        <span className='charactersLimit'>{charactersLimit - todo.length} characters remaining</span>
+        <InputFeild charactersLimit={charactersLimit} todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
         <TodoList todos={todos} setTodos={setTodos} completedTodos={completedTodos} setCompletedTodos={setCompletedTodos}/>
       </div>
     </DragDropContext>

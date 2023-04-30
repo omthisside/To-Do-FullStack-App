@@ -19,6 +19,12 @@
   text-align: center;
 }
 
+.charactersLimit {
+  font-size: 20px;
+  color: #2f74c0;
+  z-index: 1;
+}
+
 @media (max-width: 800px) {
   .heading {
     margin: 15px 0;
