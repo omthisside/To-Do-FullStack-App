@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import InputFeild from './components/InputFeild';
 import { Todo } from './model';
@@ -12,6 +12,20 @@ const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
   const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
+
+  useEffect(() => {
+    const savedTodos = JSON.parse(
+      localStorage.getItem('react-todos-app-data') as string
+    );
+      if (savedTodos) {
+        setTodos(savedTodos);
+      }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('react-todos-app-data', JSON.stringify(todos));
+  }, [todos]);
+  
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,6 +62,7 @@ const App: React.FC = () => {
 
     setCompletedTodos(complete);
     setTodos(active);
+    console.log(result);
   };
 
   return (
@@ -55,8 +70,11 @@ const App: React.FC = () => {
       <div className="App">
         <span className="heading">Go-To-Do</span>
         <span className='charactersLimit'>{charactersLimit - todo.length} characters remaining</span>
-        <InputFeild charactersLimit={charactersLimit} todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-        <TodoList todos={todos} setTodos={setTodos} completedTodos={completedTodos} setCompletedTodos={setCompletedTodos}/>
+        <InputFeild charactersLimit={charactersLimit} todo={todo} setTodo={setTodo} handleAdd={handleAdd}/>
+        <TodoList todos={todos}
+          setTodos={setTodos} 
+          completedTodos={completedTodos} 
+          setCompletedTodos={setCompletedTodos}/>
       </div>
     </DragDropContext>
   );

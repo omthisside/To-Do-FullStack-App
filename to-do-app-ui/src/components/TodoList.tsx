@@ -33,6 +33,7 @@ const TodoList = ({ todos, setTodos, completedTodos, setCompletedTodos }: Props)
                                 />
                             ))
                         }
+                        {provided.placeholder}
                     </div>
                 )
             }
@@ -62,7 +63,6 @@ const TodoList = ({ todos, setTodos, completedTodos, setCompletedTodos }: Props)
                     </div>
                 )
             }
-
         </Droppable>
     </div>
   );
